@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import '/../page/home_page.dart';
-import '/../provider/google_sign_in.dart';
+import '../page/home_page.dart';
+import '../provider/google_sign_in.dart';
 import 'package:provider/provider.dart';
 
-void main() async {
+Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const MyApp());
+
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  static const String title = 'MainPage';
-
-  const MyApp({super.key});
+  static final String title = 'MainPage';
 
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider(
         create: (context) => GoogleSignInProvider(),
         child: MaterialApp(
+          debugShowCheckedModeBanner: false,
           title: title,
-          theme: ThemeData.dark(),
-          home: const HomePage(),
+          theme: ThemeData.dark().copyWith(accentColor: Colors.indigo),
+          home: HomePage(),
         ),
       );
 }
